@@ -1,0 +1,1 @@
+SELECT * FROM [Customer and Suppliers by City]
