@@ -52,8 +52,7 @@ SELECT [FirstName], [LastName], (SELECT SUM([Freight]) FROM [Orders]
  WHERE [OrderID] IN (SELECT [OrderID] FROM [Orders]
                      WHERE [EmployeeID] IN (SELECT [EmployeeID] FROM [Employees] AS [E2]
                                             WHERE [E1].[EmployeeID] = [E2].[EmployeeID]))),
-(SELECT TOP 1 [ShippedDate] FROM [Orders] WHERE [EmployeeID] = [E1].[EmployeeID]
-ORDER BY 1 DESC)
+(SELECT MAX([ShippedDate]) FROM [Orders] WHERE [EmployeeID] = [E1].[EmployeeID])
 FROM [Employees] AS [E1] WHERE [EmployeeID] IN (SELECT [ReportsTo] FROM [Employees])
 
 
@@ -66,7 +65,6 @@ SELECT [FirstName], [LastName], (SELECT SUM([Freight]) FROM [Orders]
  WHERE [OrderID] IN (SELECT [OrderID] FROM [Orders]
                      WHERE [EmployeeID] IN (SELECT [EmployeeID] FROM [Employees] AS [E2]
                                             WHERE [E1].[EmployeeID] = [E2].[EmployeeID]))),
-(SELECT TOP 1 [ShippedDate] FROM [Orders] WHERE [EmployeeID] = [E1].[EmployeeID]
-ORDER BY 1 DESC)
+(SELECT MAX([ShippedDate]) FROM [Orders] WHERE [EmployeeID] = [E1].[EmployeeID])
 FROM [Employees] AS [E1] WHERE [EmployeeID] NOT IN (SELECT [ReportsTo] FROM [Employees]
                                                     WHERE [ReportsTo] IS NOT NULL)
